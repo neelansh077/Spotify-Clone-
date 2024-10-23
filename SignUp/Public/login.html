@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - Spotify Clone</title>
+    <link rel="stylesheet" href="login.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("login").addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (logInSuccessfull()) {
+                    this.submit();
+                }
+            });
+        });
+
+        function logInSuccessfull() {
+
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("pass").value.trim();
+
+            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/;
+
+
+            if (email === "" || password === "") {
+                alert("All fields are required.");
+                return false;
+            }
+
+            if (!password.match(passwordPattern)) {
+                alert("Password should be 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <img width="110" class="invert" src="logo.svg" alt="">
+        </div>
+    </div>
+    <form id="login" method="post" action="http://127.0.0.1:3000/login" class="form">
+        <h1>Log in to Spotify Clone!</h1>
+        <label for="email">Email or username</label><br>
+        <input type="text" placeholder="Email or username" name="email" id="email">
+        <br><br>
+        <label for="pass">Password</label> <br>
+        <input type="password" placeholder="Password" name="pass" id="pass">
+        <br><br>
+        <button type="submit">Log In</button>
+        <div class="separation"></div>
+        <div class="forgot">
+            Don't have an account? <a href="signup.html">Sign up for Spotify</a>
+        </div>
+    </form>
+
+</body>
+
+</html>

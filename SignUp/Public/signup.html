@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Spotify Clone</title>
+    <link rel="stylesheet" href="signup.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("signUp").addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (signUpSuccessfull()) {
+                    this.submit();
+                }
+            });
+        });
+
+        function signUpSuccessfull() {
+            // Fetching form input values
+
+            var firstName = document.getElementById("fname").value.trim();
+            var lastName = document.getElementById("lname").value.trim();
+            var contactNumber = document.getElementById("contactNum").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var age = document.getElementById("age").value.trim();
+            var userName = document.getElementById("userName").value.trim();
+            var password = document.getElementById("pass").value.trim();
+            var confirmPassword = document.getElementById("confirmPass").value.trim();
+
+            // Regular expressions for validation
+            var namePattern = /^[A-Z][a-z]*$/;
+            var agePattern = /^\d+$/;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/;
+
+            if (firstName === "" || lastName === "" || contactNumber === "" || email === "" || age === "" || userName === "" || password === "" || confirmPassword === "") {
+                alert("All fields are required.");
+                return false;
+            }
+            if (!firstName.match(namePattern) || !lastName.match(namePattern)) {
+                alert("First Name and Last Name should contain only alphabets and start with a capital letter.");
+                return false;
+            }
+
+            if (!age.match(agePattern)) {
+                alert("Age should contain only numbers.");
+                return false;
+            }
+
+            if (!email.match(emailPattern)) {
+                alert("Email address should be in the correct format.");
+                return false;
+            }
+
+            if (!password.match(passwordPattern)) {
+                alert("Password should be 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                return false;
+            }
+            if (password !== confirmPassword) {
+                alert("Password and Confirm Password should be the same.");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <img width="110" class="invert" src="logo.svg" alt="">
+        </div>
+    </div>
+    <form id="signUp" method="post" action="http://127.0.0.1:3000/signUp" class="form">
+        <h1>Sign up to Spotify Clone!</h1>
+        <label for="userName">User Name</label><br>
+        <input type="text" placeholder="Enter User Name" name="userName" id="userName">
+        <br>
+        <label for="fname">First Name</label><br>
+        <input type="text" placeholder="Enter First Name" name="fname" id="fname">
+        <br>
+        <label for="lname">Last Name</label> <br>
+        <input type="text" placeholder="Enter Last Name" name="lname" id="lname">
+        <br>
+        <label for="contactNum">Contact Number</label><br>
+        <input type="number" placeholder="Enter Contact Number" name="contactNum" id="contactNum">
+        <br>
+        <label for="email">Email Id</label><br>
+        <input type="email" placeholder="Enter Email Adress" name="email" id="email">
+        <br>
+        <label for="age">Age</label><br>
+        <input type="number" placeholder="Enter Age" name="age" id="age">
+        <br>
+        <label for="pass">Password</label><br>
+        <input type="password" placeholder="Enter Password" name="pass" id="pass">
+        <br>
+        <label for="confirmPass">Confirm Password</label><br>
+        <input type="password" placeholder="Confirm Your Password" name="confirmPass" id="confirmPass">
+        <br>
+        <br>
+        <button type="submit">Log In</button>
+    </form>
+</body>
+
+</html>
